@@ -3,7 +3,7 @@ export const minimumStartupsNumber = 4
 export const maximumStartupsNumber = 8
 export const roundWonPoints = 30
 export const minimumFoundationYear = 1900
-export const sharkTankPoints = 2
+export const sharkFightPoints = 2
 
 export const deleteStartupCommand = "delete"
 export const registerStartupCommand = "register"
@@ -21,10 +21,18 @@ export const eventPoints = Object.freeze({
     FAKE_NEWS: -8,   
 });
 
-export const eventNames = Object.freeze({
+export const eventsNameWithPoints = Object.freeze({
     CONVINCING_PITCH: "Pith Convincente (+6 pontos)",
     BUGGY_PRODUCT: "Produto com Bugs (-4 pontos)",
     USER_TRACTION: "Boa Tração de Usuários (+3 pontos)",
     ANGRY_INVESTOR: "Investidor Bravo (-6 pontos)",
     FAKE_NEWS: "Pitch com Fake News (-8 pontos)",
 });
+
+export const eventsNameWithoutPoints = Object.freeze({ 
+    CONVINCING_PITCH: "Pith Convincente",
+    BUGGY_PRODUCT: "Produto com Bugs",
+    USER_TRACTION: "Boa Tração de Usuários",
+    ANGRY_INVESTOR: "Investidor Bravo",
+    FAKE_NEWS: "Pitch com Fake News",
+});   

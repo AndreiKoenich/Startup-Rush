@@ -8,7 +8,7 @@ export function startMatches() {
     const prompt = promptSync();
     
     for (let i = 0; i < global.startups.length; i++)  
-        for (let j = 0; j < Object.values(constants.eventNames).length; j++)
+        for (let j = 0; j < Object.values(constants.eventsNameWithPoints).length; j++)
             global.startups[i].events.push(0)
 
     let roundNumber = 1
@@ -94,9 +94,9 @@ function singleMatch(indexStartup1, indexStartup2) {
     let startup1Events = []
     let startup2Events = []
 
-    for (let i = 0; i < Object.values(constants.eventNames).length; i++) {
-        startup1Events.push(new Event(Object.values(constants.eventNames)[i], i))
-        startup2Events.push(new Event(Object.values(constants.eventNames)[i], i + Object.values(constants.eventNames).length))
+    for (let i = 0; i < Object.values(constants.eventsNameWithPoints).length; i++) {
+        startup1Events.push(new Event(Object.values(constants.eventsNameWithPoints)[i], i))
+        startup2Events.push(new Event(Object.values(constants.eventsNameWithPoints)[i], i + Object.values(constants.eventsNameWithPoints).length))
     }
 
     let startup1Index = global.startups.indexOf(startup1)
@@ -138,7 +138,7 @@ function singleMatch(indexStartup1, indexStartup2) {
         if (command === constants.endMatchCommand)
             break
 
-        for (let i = 0; i < Object.values(constants.eventNames).length; i++) {
+        for (let i = 0; i < Object.values(constants.eventsNameWithPoints).length; i++) {
             if (command == startup1Events[i].number && startup1Events[i].isValid) {
                 global.startups[startup1Index].points += Object.values(constants.eventPoints)[i]
                 global.startups[startup1Index].events[i]++
@@ -170,7 +170,7 @@ function getWinner(startup1Index, startup2Index) {
 
     if (global.startups[startup1Index].points > global.startups[startup2Index].points) {
         global.startups[startup1Index].points += constants.roundWonPoints
-        global.startups[startup1Index].events[Object.values(constants.eventNames).indexOf(constants.eventNames.ROUND_WON)]++
+        global.startups[startup1Index].events[Object.values(constants.eventsNameWithPoints).indexOf(constants.eventsNameWithPoints.ROUND_WON)]++
         global.startups[startup2Index].stillInGame = false
         console.log("\n-----------------------------------------------\n")
         console.log(`A startup ${global.startups[startup1Index].name} venceu o confronto!`)
@@ -178,20 +178,20 @@ function getWinner(startup1Index, startup2Index) {
 
     else if (global.startups[startup1Index].points < global.startups[startup2Index].points) {
         global.startups[startup2Index].points += constants.roundWonPoints
-        global.startups[startup2Index].events[Object.values(constants.eventNames).indexOf(constants.eventNames.ROUND_WON)]++
+        global.startups[startup2Index].events[Object.values(constants.eventsNameWithPoints).indexOf(constants.eventsNameWithPoints.ROUND_WON)]++
         global.startups[startup1Index].stillInGame = false
         console.log("\n-----------------------------------------------\n")
         console.log(`A startup ${global.startups[startup2Index].name} venceu o confronto!`)
     }
 
     else {
-        let sharkTankIndex = sharkTank(startup1Index, startup2Index)
-        global.startups[sharkTankIndex].points += (constants.roundWonPoints + constants.sharkTankPoints)
-        global.startups[sharkTankIndex].events[Object.values(constants.eventNames).indexOf(constants.eventNames.ROUND_WON)]++
+        let sharkFightIndex = sharkFight(startup1Index, startup2Index)
+        global.startups[sharkFightIndex].points += (constants.roundWonPoints + constants.sharkFightPoints)
+        global.startups[sharkFightIndex].events[Object.values(constants.eventsNameWithPoints).indexOf(constants.eventsNameWithPoints.ROUND_WON)]++
         console.log("\n-----------------------------------------------\n")
-        console.log(`A startup ${global.startups[sharkTankIndex].name} venceu o confronto por meio de shark tank!`)
+        console.log(`A startup ${global.startups[sharkFightIndex].name} venceu o confronto por meio de Shark Fight (+${constants.sharkFightPoints} pontos)!`)
 
-        if (sharkTankIndex === startup1Index) {
+        if (sharkFightIndex === startup1Index) {
             global.startups[startup2Index].stillInGame = false
         } else {
             global.startups[startup1Index].stillInGame = false
@@ -207,7 +207,7 @@ function shuffleArray(array) {
     return array;
 }
 
-function sharkTank (index1, index2) {
+function sharkFight (index1, index2) {
     return Math.random() < 0.5 ? index1 : index2
 }
 
@@ -219,7 +219,7 @@ function showFinalResults() {
     global.startups.forEach((startup, index) => {
         process.stdout.write(`${index + 1}. ${startup.name} - ${startup.points} pontos totais - Eventos: `);
         for (let i = 0; i < startup.events.length; i++) 
-                process.stdout.write(`${Object.values(constants.eventNames)[i]} (${startup.events[i]} VEZES) || `);
+                process.stdout.write(`${Object.values(constants.eventsNameWithoutPoints)[i]} (${startup.events[i]} VEZES) || `);
         console.log();
     });
 
