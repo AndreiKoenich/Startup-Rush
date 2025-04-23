@@ -1,5 +1,5 @@
 import * as constants from "./constants.js"
-import { waitForKeyPress } from "./utils.js"
+import { waitForKeyPress, clearTerminal } from "./utils.js"
 import { Startup } from "./classes.js"
 import { startMatches } from "./tournament.js"
 
@@ -32,8 +32,9 @@ export function executeCommand(command) {
 }
 
 export function helpCommand() {
-    console.clear()
-    console.log("COMANDOS DISPONÍVEIS\n")
+    clearTerminal()
+    console.log("COMANDOS DISPONÍVEIS")
+    console.log("-----------------------------------------------\n")
     console.log("register <nome da startup> <ano de fundação> <slogan> - Registra uma nova startup.\n")
     console.log("view - Mostra todas as startups cadastradas.\n")
     console.log("delete <nome da startup> - Deleta uma startup.\n")
@@ -62,7 +63,7 @@ export function registerStartupCommand(command) {
 
     const name = args.slice(1, foundationYearIndex).join(" ");
     const foundationYear = parseInt(args[foundationYearIndex]);
-    const slogan = args.slice(foundationYearIndex + 1).join(" ");
+    const slogan = args.slice(foundationYearIndex + 1).join(" ").trim(); 
 
     if (isNaN(foundationYear)) {
         console.log("\nERRO: ano de fundação inválido!");
@@ -76,13 +77,19 @@ export function registerStartupCommand(command) {
         return;
     }
 
+    if (slogan === "") { 
+        console.log("\nERRO: o slogan não pode estar vazio ou conter apenas espaços!");
+        waitForKeyPress();
+        return;
+    }
+
     global.startups.push(new Startup(name, foundationYear, slogan));
     console.log("\nStartup registrada com sucesso!");
     waitForKeyPress();
 }
 
 export function viewStartupsCommand() {
-    console.clear()
+    clearTerminal()
     console.log("STARTUPS CADASTRADAS\n")
 
     if (global.startups.length === 0) {
@@ -148,6 +155,6 @@ export function startTournamentCommand() {
 }
 
 export function exitCommand () {
-    console.clear()
+    clearTerminal()
     process.exit(0)
 }

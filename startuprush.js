@@ -1,17 +1,18 @@
 import promptSync from "prompt-sync";
 import { helpCommand } from "./Sources/constants.js";
 import { executeCommand } from "./Sources/commands.js";
+import { clearTerminal } from "./Sources/utils.js";
 
 global.startups = []
 
 function main () {
 
-    console.clear()
+    clearTerminal()
     const prompt = promptSync();
 
     while (true) {
 
-        console.clear()
+        clearTerminal()
         console.log("BEM-VINDO AO STARTUP RUSH!\n")
         console.log("AUTOR: Andrei Pochmann Koenich\n")
         console.log("Digite o comando desejado e pressione ENTER.")

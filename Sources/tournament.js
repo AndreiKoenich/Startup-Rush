@@ -1,6 +1,6 @@
 import * as constants from "./constants.js";
 import { Match, Event } from "./classes.js";
-import { waitForKeyPress } from "./utils.js"
+import { waitForKeyPress, clearTerminal } from "./utils.js"
 import promptSync from "prompt-sync";
 
 export function startMatches() {
@@ -36,7 +36,7 @@ export function startMatches() {
 
         while (matches.length > 0) {
 
-            console.clear()
+            clearTerminal()
             let invalidCommand = true
             
             console.log(`RODADA #${roundNumber}:\n`)
@@ -70,7 +70,7 @@ export function startMatches() {
         roundNumber++
     }
 
-    console.clear()
+    clearTerminal()
 
     for (let i = 0; i < global.startups.length; i++) {
         if (global.startups[i].stillInGame) {
@@ -82,6 +82,7 @@ export function startMatches() {
     console.log("\n-----------------------------------------------\n")
     console.log("FIM DO TORNEIO!")
     waitForKeyPress()
+    clearTerminal()
     showFinalResults()
     resetStartups()
 }
@@ -108,7 +109,7 @@ function singleMatch(indexStartup1, indexStartup2) {
 
     while (command !== constants.endMatchCommand) {
 
-        console.clear()
+        clearTerminal()
 
         console.log(`CONFRONTO: ${startup1.name} VS ${startup2.name}`)
 
@@ -215,7 +216,6 @@ function sharkFight (index1, index2) {
 
 function showFinalResults() {
 
-    console.clear()
     console.log("Resultados finais:\n");
     global.startups.sort((a, b) => b.points - a.points);
     global.startups.forEach((startup, index) => {
