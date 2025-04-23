@@ -131,7 +131,7 @@ export function startTournamentCommand() {
     if (global.startups.length < constants.minimumStartupsNumber) {
         console.log("\nERRO: Número insuficiente de startups para iniciar o torneio.")
         console.log(`São necessárias no mínimo ${constants.minimumStartupsNumber} e no máximo ${constants.maximumStartupsNumber} startups.`)
-        console.log("Para iniciar o torneio, o número de startups deve ser par.")
+        console.log("Para iniciar o torneio, o número de startups registradas deve ser par.")
         waitForKeyPress()
         return
     }
@@ -139,14 +139,14 @@ export function startTournamentCommand() {
     else if (global.startups.length > constants.maximumStartupsNumber) {
         console.log("\nERRO: Número excessivo de startups para iniciar o torneio.")
         console.log(`São permitidas no máximo ${constants.maximumStartupsNumber} startups.`)
-        console.log("Para iniciar o torneio, o número de startups deve ser par.")
+        console.log("Para iniciar o torneio, o número de startups registradas deve ser par.")
         waitForKeyPress()
         return
     }
 
     else if (global.startups.length % 2 !== 0) {
         console.log("\nERRO: Número ímpar de startups.")
-        console.log("Para iniciar o torneio, o número de startups deve ser par.")
+        console.log("Para iniciar o torneio, o número de startups registradas deve ser par.")
         waitForKeyPress()
         return
     }
