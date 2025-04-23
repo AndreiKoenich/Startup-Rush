@@ -1,5 +1,8 @@
-import readlineSync from "readline-sync"
+import readlineSync from "readline-sync";
 
 export function waitForKeyPress() {
-    readlineSync.keyInPause('\nPressione qualquer tecla para continuar.');
+    readlineSync.keyIn('\nPressione ESPAÇO para continuar.', {
+        hideEchoBack: true,  
+        mask: ''            
+    });
 }

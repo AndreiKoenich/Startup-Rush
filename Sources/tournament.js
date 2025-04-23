@@ -13,7 +13,7 @@ export function startMatches() {
 
     let roundNumber = 1
 
-    while (roundNumber <= global.startups.length / 2) {
+    while (roundNumber <= calculateTournamentRounds(global.startups.length)) {
 
         let indexesArray = []
         let matches = []
@@ -24,8 +24,10 @@ export function startMatches() {
 
         shuffleArray(indexesArray)
 
+        let matchLimit = indexesArray.length % 2 === 0 ? indexesArray.length : indexesArray.length-1
         let matchNumber = 1
-        for (let i = 0; i < indexesArray.length; i += 2) {
+
+        for (let i = 0; i < matchLimit; i += 2) {
             let startup1 = global.startups[indexesArray[i]]
             let startup2 = global.startups[indexesArray[i + 1]]
             matches.push(new Match(startup1, startup2, matchNumber))
@@ -236,4 +238,15 @@ function resetStartups() {
         global.startups[i].stillInGame = true
         global.startups[i].events = []
     }
+}
+
+function calculateTournamentRounds(participants) {
+    let rounds = 0;
+    
+    while (participants > 1) {
+        participants = participants / 2;
+        rounds++;
+    }
+    
+    return rounds;
 }

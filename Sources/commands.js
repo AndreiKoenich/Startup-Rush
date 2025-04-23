@@ -44,13 +44,6 @@ export function helpCommand() {
 
 export function registerStartupCommand(command) {
 
-    if (global.startups.length >= constants.maximumStartupsNumber) {
-        console.log("\nERRO: número máximo de startups atingido!");
-        console.log(`É permitido o cadastro de no máximo ${constants.maximumStartupsNumber} startups.`);
-        waitForKeyPress();
-        return;
-    }
-
     const args = command.split(" ");
 
     if (args.length < 3) {
@@ -62,7 +55,7 @@ export function registerStartupCommand(command) {
     const foundationYearIndex = args.findIndex(arg => !isNaN(parseInt(arg)));
 
     if (foundationYearIndex === -1 || foundationYearIndex < 2) {
-        console.log("\nERRO: comando inválido! Certifique-se de incluir o ano de fundação.");
+        console.log("\nERRO: comando inválido! Use: register <nome da startup> <ano de fundação> <slogan>");
         waitForKeyPress();
         return;
     }
