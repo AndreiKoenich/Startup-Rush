@@ -1,6 +1,6 @@
 Este programa em Javascript simula uma competição realizada entre diferentes Startups que podem ser cadastradas. Para mais informações, consulte o arquivo "Descrição.pdf".
 
-Pexecutar o StartupRush no terminal do sistema operacional Linux, siga os passos abaixo:
+Para executar o StartupRush no terminal do sistema operacional Linux, siga os passos abaixo:
 
 1 - Verifique se você possui o NodeJS instalado, com o comando `node -v`. Caso não tenha, instale o NodeJS com o comando `sudo apt install nodejs`.
 
